@@ -1,23 +1,128 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <!--
-      viewport-fit=cover : env(safe-area-inset-*) を有効にするために必須
-      （ノッチ / Dynamic Island / ホームインジケーターの安全領域を取得できるようになる）
-      maximum-scale=1, user-scalable=no : ネイティブアプリらしく、ピンチズームでの
-      レイアウト崩れを防ぐ（フォーム入力のダブルタップズームも抑制）
-    -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no"
-    />
-    <meta name="theme-color" content="#000000" />
-    <title>スロメモ</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>スロメモ｜パチスロ・パチンコ収支管理アプリ</title>
+<meta name="description" content="スロメモはパチスロ・パチンコの収支を簡単に記録・分析できる収支管理アプリです。" />
+<style>
+  :root {
+    --black: #0b0b0d;
+    --white: #ffffff;
+    --blue: #0A5FFF;
+    --gray-100: #f5f6f8;
+    --gray-300: #e2e4e9;
+    --gray-500: #8a8f98;
+    --gray-700: #4b4f58;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--white);
+    color: var(--black);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.75;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+
+  header.site-header { border-bottom: 1px solid var(--gray-300); padding: 18px 0; }
+  header.site-header .wrap { display: flex; align-items: center; gap: 10px; }
+  .logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; color: var(--black); }
+  .logo svg { display: block; }
+
+  main { padding: 48px 0 64px; }
+
+  footer.site-footer { border-top: 1px solid var(--gray-300); padding: 28px 0 40px; margin-top: 40px; }
+  footer.site-footer .wrap { display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center; }
+  .footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+  .footer-links a { color: var(--gray-700); font-size: 13px; }
+  .copyright { color: var(--gray-500); font-size: 12px; }
+
+  .hero { text-align: center; padding: 24px 0 8px; }
+  .hero .icon {
+    width: 88px; height: 88px; border-radius: 22px; background: var(--black);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;
+  }
+  .hero h1 { font-size: 30px; font-weight: 800; margin: 0 0 14px; letter-spacing: 0.02em; }
+  .hero p.lead { font-size: 16px; color: var(--gray-700); max-width: 460px; margin: 0 auto 36px; }
+
+  .link-cards { display: grid; gap: 12px; margin-top: 8px; }
+  .link-card {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 18px; border: 1px solid var(--gray-300); border-radius: 14px;
+    color: var(--black) !important; text-decoration: none !important;
+    font-weight: 600; font-size: 15px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .link-card:hover { border-color: var(--blue); background: var(--gray-100); }
+  .link-card .chev { color: var(--gray-500); font-weight: 400; }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 26px; }
+    main { padding: 32px 0 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="14" width="4" height="7" rx="1" fill="#0A5FFF"/>
+        <rect x="10" y="9" width="4" height="12" rx="1" fill="#0A5FFF"/>
+        <rect x="17" y="4" width="4" height="17" rx="1" fill="#0A5FFF"/>
+      </svg>
+      スロメモ
+    </a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero">
+      <div class="icon">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="14" width="4" height="7" rx="1" fill="#4C9AFF"/>
+          <rect x="10" y="9" width="4" height="12" rx="1" fill="#0A5FFF"/>
+          <rect x="17" y="4" width="4" height="17" rx="1" fill="#ffffff"/>
+        </svg>
+      </div>
+      <h1>スロメモ</h1>
+      <p class="lead">スロメモはパチスロ・パチンコの収支を簡単に記録・分析できる収支管理アプリです。</p>
+    </section>
+
+    <nav class="link-cards" aria-label="サイト内リンク">
+      <a class="link-card" href="privacy.html">
+        <span>プライバシーポリシー</span>
+        <span class="chev">›</span>
+      </a>
+      <a class="link-card" href="terms.html">
+        <span>利用規約</span>
+        <span class="chev">›</span>
+      </a>
+      <a class="link-card" href="contact.html">
+        <span>お問い合わせ</span>
+        <span class="chev">›</span>
+      </a>
+    </nav>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-links">
+      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="terms.html">利用規約</a>
+      <a href="contact.html">お問い合わせ</a>
+    </div>
+    <div class="copyright">© 2026 スロメモ</div>
+  </div>
+</footer>
+
+</body>
 </html>
