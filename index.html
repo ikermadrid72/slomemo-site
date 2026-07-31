@@ -7,63 +7,66 @@
 <meta name="description" content="スロメモはパチスロ・パチンコの収支を簡単に記録・分析できる収支管理アプリです。" />
 <style>
   :root {
-    --black: #0b0b0d;
+    --ink: #0F172A;
+    --blue: #2563EB;
     --white: #ffffff;
-    --blue: #0A5FFF;
-    --gray-100: #f5f6f8;
-    --gray-300: #e2e4e9;
-    --gray-500: #8a8f98;
-    --gray-700: #4b4f58;
+    --gray-100: #f8fafc;
+    --gray-200: #e7eaf0;
+    --gray-500: #8b93a1;
+    --gray-600: #5b6472;
   }
   * { box-sizing: border-box; }
   html, body {
     margin: 0;
     padding: 0;
     background: var(--white);
-    color: var(--black);
+    color: var(--ink);
     font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     line-height: 1.75;
   }
   a { color: var(--blue); text-decoration: none; }
   a:hover { text-decoration: underline; }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 0 20px; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
 
-  header.site-header { border-bottom: 1px solid var(--gray-300); padding: 18px 0; }
-  header.site-header .wrap { display: flex; align-items: center; gap: 10px; }
-  .logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 17px; color: var(--black); }
-  .logo svg { display: block; }
+  header.site-header { padding: 28px 0; }
+  header.site-header .wrap { display: flex; align-items: center; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none !important; }
+  .brand-logo { height: 26px; width: auto; display: block; }
+  .brand-logo svg { height: 100%; width: auto; display: block; }
+  .brand-name { font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: 0.01em; }
 
-  main { padding: 48px 0 64px; }
+  main { padding: 40px 0 72px; }
 
-  footer.site-footer { border-top: 1px solid var(--gray-300); padding: 28px 0 40px; margin-top: 40px; }
-  footer.site-footer .wrap { display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center; }
-  .footer-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-  .footer-links a { color: var(--gray-700); font-size: 13px; }
-  .copyright { color: var(--gray-500); font-size: 12px; }
+  footer.site-footer { border-top: 1px solid var(--gray-200); padding: 32px 0 48px; margin-top: 48px; }
+  footer.site-footer .wrap { display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center; }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
+  .footer-links a { color: var(--gray-600); font-size: 13px; }
+  .footer-meta { color: var(--gray-500); font-size: 12px; line-height: 1.9; }
 
-  .hero { text-align: center; padding: 24px 0 8px; }
+  .hero { text-align: center; padding: 32px 0 8px; }
   .hero .icon {
-    width: 88px; height: 88px; border-radius: 22px; background: var(--black);
-    display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;
+    width: 88px; height: 88px; border-radius: 22px; background: var(--ink);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 28px;
   }
-  .hero h1 { font-size: 30px; font-weight: 800; margin: 0 0 14px; letter-spacing: 0.02em; }
-  .hero p.lead { font-size: 16px; color: var(--gray-700); max-width: 460px; margin: 0 auto 36px; }
+  .hero h1 { font-size: 30px; font-weight: 800; margin: 0 0 16px; letter-spacing: 0.02em; }
+  .hero p.lead { font-size: 16px; color: var(--gray-600); max-width: 460px; margin: 0 auto 40px; }
 
   .link-cards { display: grid; gap: 12px; margin-top: 8px; }
   .link-card {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 16px 18px; border: 1px solid var(--gray-300); border-radius: 14px;
-    color: var(--black) !important; text-decoration: none !important;
+    padding: 18px 20px; border: 1px solid var(--gray-200); border-radius: 14px;
+    color: var(--ink) !important; text-decoration: none !important;
     font-weight: 600; font-size: 15px;
-    transition: border-color .15s ease, background .15s ease;
+    transition: border-color .15s ease, background .15s ease, box-shadow .15s ease;
   }
-  .link-card:hover { border-color: var(--blue); background: var(--gray-100); }
+  .link-card:hover { border-color: var(--blue); background: var(--gray-100); box-shadow: 0 2px 10px rgba(15,23,42,0.06); }
   .link-card .chev { color: var(--gray-500); font-weight: 400; }
 
   @media (max-width: 480px) {
+    header.site-header { padding: 22px 0; }
+    main { padding: 28px 0 56px; }
     .hero h1 { font-size: 26px; }
-    main { padding: 32px 0 48px; }
   }
 </style>
 </head>
@@ -71,13 +74,15 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="logo" href="index.html">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="14" width="4" height="7" rx="1" fill="#0A5FFF"/>
-        <rect x="10" y="9" width="4" height="12" rx="1" fill="#0A5FFF"/>
-        <rect x="17" y="4" width="4" height="17" rx="1" fill="#0A5FFF"/>
-      </svg>
-      スロメモ
+    <a class="brand" href="index.html" aria-label="KJ Studio Labs トップページへ">
+      <span class="brand-logo">
+        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="72" y="72" width="880" height="880" rx="208" fill="#0F172A"/>
+          <path d="M704 952 H744 C859 952 952 859 952 744 V704 Z" fill="#2563EB"/>
+          <text x="512" y="635" text-anchor="middle" font-family="Georgia,Times New Roman,serif" font-size="470" letter-spacing="-36" fill="#FFFFFF">KJ</text>
+        </svg>
+      </span>
+      <span class="brand-name">KJ Studio Labs</span>
     </a>
   </div>
 </header>
@@ -120,7 +125,10 @@
       <a href="terms.html">利用規約</a>
       <a href="contact.html">お問い合わせ</a>
     </div>
-    <div class="copyright">© 2026 スロメモ</div>
+    <div class="footer-meta">
+      <div>Developed by KJ Studio Labs</div>
+      <div>© 2026 KJ Studio Labs</div>
+    </div>
   </div>
 </footer>
 
